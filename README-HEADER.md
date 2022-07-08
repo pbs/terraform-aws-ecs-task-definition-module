@@ -1,4 +1,4 @@
-# PBS TF ecs task definition module
+# PBS TF ECS Task Definition Module
 
 ## Installation
 
