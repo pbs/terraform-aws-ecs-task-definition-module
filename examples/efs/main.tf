@@ -26,7 +26,7 @@ module "task" {
       container_path = "/mnt/efs1"
     },
     {
-      file_system_id = module.efs1.id
+      file_system_id = module.efs2.id
       efs_path       = "/"
       container_path = "/mnt/efs2"
     }

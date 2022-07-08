@@ -1,13 +1,11 @@
-# PBS TF ecs task definition module
+# PBS TF ECS Task Definition Module
 
 ## Installation
 
 ### Using the Repo Source
 
 ```hcl
-module "task" {
-    source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z"
-}
+github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods

@@ -1,13 +1,11 @@
-# PBS TF ecs task definition module
+# PBS TF ECS Task Definition Module
 
 ## Installation
 
 ### Using the Repo Source
 
 ```hcl
-module "task" {
-    source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=0.0.2"
-}
+github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -24,7 +22,7 @@ Integrate this module like so:
 
 ```hcl
 module "task" {
-  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=0.0.2"
+  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z"
 
   # Tagging Parameters
   organization = var.organization
@@ -42,7 +40,7 @@ module "task" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`0.0.2`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -66,7 +64,7 @@ Below is automatically generated documentation on this Terraform module using [t
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.21.0 |
 
 ## Modules
 
@@ -94,7 +92,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_environment"></a> [environment](#input\_environment) | Environment (sharedtools, dev, staging, prod) | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment (sharedtools, dev, staging, qa, prod) | `string` | n/a | yes |
 | <a name="input_organization"></a> [organization](#input\_organization) | Organization using this module. Used to prefix tags so that they are easily identified as being from your organization | `string` | n/a | yes |
 | <a name="input_product"></a> [product](#input\_product) | Tag used to group resources according to product | `string` | n/a | yes |
 | <a name="input_repo"></a> [repo](#input\_repo) | Tag used to point to the repo using this module | `string` | n/a | yes |
@@ -112,7 +110,7 @@ No modules.
 | <a name="input_log_group_name"></a> [log\_group\_name](#input\_log\_group\_name) | (optional) name for the log group | `string` | `null` | no |
 | <a name="input_memory_reservation"></a> [memory\_reservation](#input\_memory\_reservation) | (optional) memory reservation for task | `number` | `512` | no |
 | <a name="input_mesh_name"></a> [mesh\_name](#input\_mesh\_name) | (optional) the name for the App Mesh this task is associated with. If null, ignored | `string` | `null` | no |
-| <a name="input_name"></a> [name](#input\_name) | Name of the Ecs Task Definition Module. If null, will default to product. | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of the ECS Task Definition Module. If null, will default to product. | `string` | `null` | no |
 | <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | (optional) network mode for the task | `string` | `"awsvpc"` | no |
 | <a name="input_newrelic_firelens_image"></a> [newrelic\_firelens\_image](#input\_newrelic\_firelens\_image) | Name for AWS Secrets Manager secret of New Relic Insights insert key. | `string` | `"533243300146.dkr.ecr.us-east-1.amazonaws.com/newrelic/logging-firelens-fluentbit"` | no |
 | <a name="input_newrelic_secret_arn"></a> [newrelic\_secret\_arn](#input\_newrelic\_secret\_arn) | ARN for AWS Secrets Manager secret of New Relic Insights insert key. | `string` | `null` | no |
