@@ -35,6 +35,33 @@ data "aws_iam_policy_document" "policy_doc" {
   }
   statement {
     actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage"
+    ]
+    resources = ["arn:aws:ecr:${data.aws_region.current.name}:840364872349:repository/aws-appmesh-envoy"]
+  }
+  statement {
+    actions = [
+      "xray:PutTraceSegments",
+      "xray:PutTelemetryRecords",
+      "xray:GetSamplingRules",
+      "xray:GetSamplingTargets",
+      "xray:GetSamplingStatisticSummaries"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    actions = [
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssmmessages:OpenDataChannel"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    actions = [
       "kms:Decrypt",
       "ssm:GetParametersByPath",
       "ssm:GetParameters",
@@ -60,16 +87,6 @@ data "aws_iam_policy_document" "vgw_policy_doc" {
       "appmesh:StreamAggregatedResources"
     ]
     resources = ["arn:aws:appmesh:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:mesh/${var.mesh_name}/virtualGateway/${var.virtual_gateway}"]
-  }
-  statement {
-    actions = [
-      "xray:PutTraceSegments",
-      "xray:PutTelemetryRecords",
-      "xray:GetSamplingRules",
-      "xray:GetSamplingTargets",
-      "xray:GetSamplingStatisticSummaries"
-    ]
-    resources = ["*"]
   }
   statement {
     actions = [
