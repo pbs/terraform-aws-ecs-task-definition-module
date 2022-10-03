@@ -35,14 +35,39 @@ data "aws_iam_policy_document" "policy_doc" {
   }
   statement {
     actions = [
+      "xray:PutTraceSegments",
+      "xray:PutTelemetryRecords",
+      "xray:GetSamplingRules",
+      "xray:GetSamplingTargets",
+      "xray:GetSamplingStatisticSummaries",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    actions = [
+      "ecr-public:GetAuthorizationToken",
+      "sts:GetServiceBearerToken",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    actions = [
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssmmessages:OpenDataChannel",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    actions = [
       "kms:Decrypt",
       "ssm:GetParametersByPath",
       "ssm:GetParameters",
       "ssm:GetParameter"
     ]
     resources = [
-      "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_path}",
-      "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_path}*"
+      "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_path}*",
     ]
   }
 }
@@ -73,11 +98,8 @@ data "aws_iam_policy_document" "vgw_policy_doc" {
   }
   statement {
     actions = [
-      "xray:PutTraceSegments",
-      "xray:PutTelemetryRecords",
-      "xray:GetSamplingRules",
-      "xray:GetSamplingTargets",
-      "xray:GetSamplingStatisticSummaries"
+      "ecr-public:GetAuthorizationToken",
+      "sts:GetServiceBearerToken",
     ]
     resources = ["*"]
   }

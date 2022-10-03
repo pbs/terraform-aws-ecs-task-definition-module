@@ -84,7 +84,7 @@ variable "virtual_gateway" {
 
 variable "envoy_tag" {
   description = "(optional) tag for envoy. Update periodically if using App Mesh."
-  default     = "v1.18.3.0-prod"
+  default     = "v1.23.1.0-prod"
   type        = string
 }
 
