@@ -35,14 +35,6 @@ data "aws_iam_policy_document" "policy_doc" {
   }
   statement {
     actions = [
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage"
-    ]
-    resources = ["arn:aws:ecr:${data.aws_region.current.name}:840364872349:repository/aws-appmesh-envoy"]
-  }
-  statement {
-    actions = [
       "xray:PutTraceSegments",
       "xray:PutTelemetryRecords",
       "xray:GetSamplingRules",

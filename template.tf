@@ -116,7 +116,7 @@ locals {
 
   envoy_standalone_container_definition = {
     "name" : local.container_name,
-    "image" : "840364872350.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/aws-appmesh-envoy:${var.envoy_tag}",
+    "image" : "public.ecr.aws/appmesh/aws-appmesh-envoy:${var.envoy_tag}",
     "essential" : true,
     "environment" : [
       {
@@ -150,7 +150,7 @@ locals {
 
   envoy_proxy_container_definition = {
     "name" : "envoy",
-    "image" : "840364872350.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/aws-appmesh-envoy:${var.envoy_tag}",
+    "image" : "public.ecr.aws/appmesh/aws-appmesh-envoy:${var.envoy_tag}",
     "essential" : true,
     "environment" : [
       {
