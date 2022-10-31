@@ -38,5 +38,10 @@ resource "aws_ecs_task_definition" "task_def" {
     }
   }
 
+  runtime_platform {
+    operating_system_family = var.runtime_platform["operating_system_family"]
+    cpu_architecture        = var.runtime_platform["cpu_architecture"]
+  }
+
   tags = local.tags
 }
