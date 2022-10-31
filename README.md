@@ -119,6 +119,7 @@ No modules.
 | <a name="input_requires_compatibilities"></a> [requires\_compatibilities](#input\_requires\_compatibilities) | (optional) capabilities that the task requires | `set(string)` | <pre>[<br>  "FARGATE"<br>]</pre> | no |
 | <a name="input_retention_in_days"></a> [retention\_in\_days](#input\_retention\_in\_days) | (optional) log retention in days | `number` | `7` | no |
 | <a name="input_role_policy_json"></a> [role\_policy\_json](#input\_role\_policy\_json) | (optional) IAM policy to attach to role used for this task | `string` | `null` | no |
+| <a name="input_runtime_platform"></a> [runtime\_platform](#input\_runtime\_platform) | (optional) Runtime platform for the task. Defaults to LINUX operating system family w/ CPU architecture x86\_64. | <pre>object({<br>    operating_system_family = optional(string, "LINUX")<br>    cpu_architecture        = optional(string, "x86_64")<br>  })</pre> | <pre>{<br>  "cpu_architecture": "x86_64",<br>  "operating_system_family": "LINUX"<br>}</pre> | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | (optional) name of the service running this task. Only important here because the AWS console defaults to `/ecs/service_name` when displaying logs for a service | `string` | `null` | no |
 | <a name="input_ssm_path"></a> [ssm\_path](#input\_ssm\_path) | (optional) path to the ssm parameters you want pulled into your container during execution of the entrypoint | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Extra tags | `map(string)` | `{}` | no |
