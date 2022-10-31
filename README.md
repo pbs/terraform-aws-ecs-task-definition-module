@@ -5,7 +5,7 @@
 ### Using the Repo Source
 
 ```hcl
-github.com/pbs/terraform-aws-ecs-task-definition-module?ref=0.1.2
+github.com/pbs/terraform-aws-ecs-task-definition-module?ref=0.2.0
 ```
 
 ### Alternative Installation Methods
@@ -22,7 +22,7 @@ Integrate this module like so:
 
 ```hcl
 module "task" {
-  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=0.1.2"
+  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=0.2.0"
 
   # Tagging Parameters
   organization = var.organization
@@ -40,7 +40,7 @@ module "task" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`0.1.2`
+`0.2.0`
 
 Note, however that subtrees can be altered as desired within repositories.
 
