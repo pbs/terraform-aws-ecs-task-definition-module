@@ -23,6 +23,7 @@ locals {
         "awslogs-group" : local.log_group_name,
         "awslogs-region" : data.aws_region.current.name,
         "awslogs-stream-prefix" : local.container_name
+        "mode" : var.awslogs_driver_mode
       }
     }
   )
