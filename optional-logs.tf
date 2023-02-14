@@ -15,3 +15,9 @@ variable "retention_in_days" {
   default     = 7
   type        = number
 }
+
+variable "awslogs_driver_mode" {
+  description = "(optional) awslogs driver mode. Set this to `blocking` if you would rather have an outage than lose logs."
+  default     = "non-blocking"
+  type        = string
+}
