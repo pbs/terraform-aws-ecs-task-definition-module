@@ -9,6 +9,8 @@ resource "aws_cloudwatch_log_group" "logs" {
 
   retention_in_days = var.retention_in_days
 
+  log_group_class = var.log_group_class
+
   tags = {
     Name        = "${local.service_name} Log Group"
     application = var.product

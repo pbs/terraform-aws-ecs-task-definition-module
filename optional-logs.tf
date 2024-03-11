@@ -10,6 +10,12 @@ variable "log_group_name" {
   type        = string
 }
 
+variable "log_group_class" {
+  description = "(Optional) log class of the log group. Possible values are: STANDARD or INFREQUENT_ACCESS"
+  default     = "INFREQUENT_ACCESS"
+  type        = string
+}
+
 variable "retention_in_days" {
   description = "(optional) log retention in days"
   default     = 7
