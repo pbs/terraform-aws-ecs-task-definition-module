@@ -18,8 +18,7 @@ variable "image_tag" {
 
 variable "container_port" {
   description = "(optional) port the container is exposing"
-  default     = 80
-  type        = number
+  default     = null
 }
 
 variable "container_definitions" {

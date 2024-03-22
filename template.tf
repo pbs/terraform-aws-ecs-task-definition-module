@@ -39,7 +39,7 @@ locals {
       "image" : "${var.image_repo}:${var.image_tag}",
       "environment" : local.env_vars,
       "portMappings" : [{
-        "containerPort" : var.container_port
+        "containerPort" : local.open_port
       }],
       "essential" : true,
       "logConfiguration" : local.app_log_configuration,
@@ -142,7 +142,7 @@ locals {
     "user" : "1337",
     "portMappings" : [
       {
-        "containerPort" : var.container_port,
+        "containerPort" : local.open_port,
         "protocol" : "tcp"
       }
     ],
