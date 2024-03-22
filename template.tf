@@ -38,12 +38,13 @@ locals {
       "name" : local.container_name,
       "image" : "${var.image_repo}:${var.image_tag}",
       "environment" : local.env_vars,
-      "portMappings" : [{
-        "containerPort" : local.open_port
-      }],
       "essential" : true,
       "logConfiguration" : local.app_log_configuration,
     },
+    var.network_mode != "none" ? {
+      "portMappings" : [{ "containerPort" : local.open_port }],
+    } : {},
+    var.network_mode == "none" ? { "disableNetworking" : true, } : {},
     length(var.efs_mounts) == 0 ? {} : {
       "mountPoints" : [
         for mount in var.efs_mounts : {
