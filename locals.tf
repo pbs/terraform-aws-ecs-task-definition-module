@@ -9,8 +9,8 @@ locals {
   task_execution_role_policy_json = var.task_execution_role_policy_json != null ? var.task_execution_role_policy_json : data.aws_iam_policy_document.task_execution_role_policy_doc[0].json
   get_newrelic_secret             = var.newrelic_secret_arn == null && var.newrelic_secret_name != null
   newrelic_secret_arn             = var.newrelic_secret_arn != null ? var.newrelic_secret_arn : local.get_newrelic_secret ? data.aws_secretsmanager_secret.newrelic_secret[0].arn : ""
-
-  creator = "terraform"
+  open_port                       = var.network_mode != "none" ? var.container_port : null
+  creator                         = "terraform"
 
   defaulted_tags = merge(
     var.tags,
