@@ -5,7 +5,7 @@
 ### Using the Repo Source
 
 ```hcl
-github.com/pbs/terraform-aws-ecs-task-definition-module?ref=2.0.0
+github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -22,7 +22,7 @@ Integrate this module like so:
 
 ```hcl
 module "task" {
-  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=2.0.0"
+  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z"
 
   # Tagging Parameters
   organization = var.organization
@@ -40,7 +40,7 @@ module "task" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`2.0.0`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -127,6 +127,7 @@ No modules.
 | <a name="input_tags"></a> [tags](#input\_tags) | Extra tags | `map(string)` | `{}` | no |
 | <a name="input_task_execution_role_policy_json"></a> [task\_execution\_role\_policy\_json](#input\_task\_execution\_role\_policy\_json) | (optional) IAM policy to attach to task execution role used for this task | `string` | `null` | no |
 | <a name="input_task_family"></a> [task\_family](#input\_task\_family) | (optional) task family for task. This is effectively the name of the task, without qualification of revision | `string` | `null` | no |
+| <a name="input_use_cwagent_sidecar"></a> [use\_cwagent\_sidecar](#input\_use\_cwagent\_sidecar) | (optional) if set to true, will add a cwagent sidecar container | `bool` | `false` | no |
 | <a name="input_use_xray_sidecar"></a> [use\_xray\_sidecar](#input\_use\_xray\_sidecar) | (optional) if set to null, will use the sidecar to trace the task if envoy is used, as that automatically implements tracing configs. | `bool` | `null` | no |
 | <a name="input_virtual_gateway"></a> [virtual\_gateway](#input\_virtual\_gateway) | (optional) the name of the virtual gateway associated with this task definition. If null, ignored | `string` | `null` | no |
 | <a name="input_virtual_node"></a> [virtual\_node](#input\_virtual\_node) | (optional) the name of the virtual node associated with this task definition. Ignored if virtual\_gateway set. If null, ignored | `string` | `null` | no |

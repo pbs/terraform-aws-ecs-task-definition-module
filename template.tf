@@ -111,6 +111,8 @@ locals {
     }
   }
 
+
+
   null_safe_mesh_name       = var.mesh_name != null ? var.mesh_name : ""
   null_safe_virtual_gateway = var.virtual_gateway != null ? var.virtual_gateway : ""
   null_safe_virtual_node    = var.virtual_node != null ? var.virtual_node : ""
@@ -185,6 +187,26 @@ locals {
     }
   }
 
+  cwagent_container_definition = {
+    "name" : "ecs-cwagent",
+    "image" : "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+    "essential" : true,
+    "secrets" : [
+      {
+        "name" : "CW_CONFIG_CONTENT",
+        "valueFrom" : "ecs-cwagent"
+      }
+    ],
+    "logConfiguration" : {
+      "logDriver" : "awslogs",
+      "options" : {
+        "awslogs-group" : local.log_group_name,
+        "awslogs-region" : data.aws_region.current.name,
+        "awslogs-stream-prefix" : "cwagent"
+      }
+    }
+  }
+
 
   use_virtual_gateway_def = var.mesh_name != null && var.virtual_gateway != null
   use_virtual_node_def    = var.mesh_name != null && var.virtual_node != null
@@ -201,6 +223,7 @@ locals {
       local.use_newrelic_firelens_sidecar ? [local.newrelic_firelens_container_definition] : [],
       local.use_envoy_sidecar ? [local.envoy_proxy_container_definition] : [],
       local.use_xray_sidecar ? [local.xray_container_definition] : [],
+      var.use_cwagent_sidecar ? [local.cwagent_container_definition] : [],
     )
   )
 }
