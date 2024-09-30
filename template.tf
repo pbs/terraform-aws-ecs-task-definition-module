@@ -1,10 +1,14 @@
 locals {
-  env_vars = var.env_vars != null ? var.env_vars : [
+  ssm_path_envs = [
     {
       "name" : "SSM_PATH",
       "value" : local.ssm_path
     }
   ]
+  env_vars = local.ssm_path == null ? var.env_vars : var.env_vars == null ? local.ssm_path_envs : setunion(
+    local.ssm_path_envs,
+    var.env_vars
+  )
 
   app_log_configuration = merge(
     local.use_newrelic_firelens_sidecar ? {
