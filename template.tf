@@ -204,9 +204,10 @@ locals {
     "logConfiguration" : {
       "logDriver" : "awslogs",
       "options" : {
-        "awslogs-group" : local.log_group_name,
+        "awslogs-create-group" : "true",
+        "awslogs-group" : "/ecs/ecs-cwagent",
         "awslogs-region" : data.aws_region.current.name,
-        "awslogs-stream-prefix" : "cwagent"
+        "awslogs-stream-prefix" : "ecs"
       }
     }
   }
