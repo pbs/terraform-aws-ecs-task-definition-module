@@ -5,7 +5,7 @@
 ### Using the Repo Source
 
 ```hcl
-github.com/pbs/terraform-aws-ecs-task-definition-module?ref=2.0.2
+github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -22,7 +22,7 @@ Integrate this module like so:
 
 ```hcl
 module "task" {
-  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=2.0.2"
+  source = "github.com/pbs/terraform-aws-ecs-task-definition-module?ref=x.y.z"
 
   # Tagging Parameters
   organization = var.organization
@@ -40,7 +40,7 @@ module "task" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`2.0.2`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -80,6 +80,7 @@ No modules.
 | [aws_iam_role.task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.task_execution_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.task_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy_attachment.cw_agent](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_default_tags.common_tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/default_tags) | data source |
 | [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |

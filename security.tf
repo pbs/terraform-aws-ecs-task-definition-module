@@ -163,3 +163,10 @@ resource "aws_iam_role_policy" "task_execution_role_policy" {
 
   policy = local.task_execution_role_policy_json
 }
+
+resource "aws_iam_role_policy_attachment" "cw_agent" {
+  count = var.use_cwagent_sidecar ? 1 : 0
+
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role       = aws_iam_role.task_role.name
+}
