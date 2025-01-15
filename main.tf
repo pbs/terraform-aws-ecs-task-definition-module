@@ -18,7 +18,7 @@ resource "aws_ecs_task_definition" "task_def" {
       type           = "APPMESH"
       container_name = "envoy"
       properties = {
-        AppPorts         = var.container_port
+        AppPorts         = local.open_port
         EgressIgnoredIPs = "169.254.170.2,169.254.169.254"
         IgnoredUID       = "1337"
         ProxyEgressPort  = 15001
