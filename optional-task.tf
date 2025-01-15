@@ -110,6 +110,12 @@ variable "use_xray_sidecar" {
   type        = bool
 }
 
+variable "use_cwagent_sidecar" {
+  description = "(optional) if set to true, will add a cwagent sidecar container"
+  default     = false
+  type        = bool
+}
+
 variable "command" {
   description = "(optional) command to run in the container as an array. e.g. [\"sleep\", \"10\"]. If null, does not set a command in the task definition."
   default     = null

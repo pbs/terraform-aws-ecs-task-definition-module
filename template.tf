@@ -1,10 +1,14 @@
 locals {
-  env_vars = var.env_vars != null ? var.env_vars : [
+  ssm_path_envs = [
     {
       "name" : "SSM_PATH",
       "value" : local.ssm_path
     }
   ]
+  env_vars = local.ssm_path == null ? var.env_vars : var.env_vars == null ? local.ssm_path_envs : setunion(
+    local.ssm_path_envs,
+    var.env_vars
+  )
 
   app_log_configuration = merge(
     local.use_newrelic_firelens_sidecar ? {
@@ -112,6 +116,8 @@ locals {
     }
   }
 
+
+
   null_safe_mesh_name       = var.mesh_name != null ? var.mesh_name : ""
   null_safe_virtual_gateway = var.virtual_gateway != null ? var.virtual_gateway : ""
   null_safe_virtual_node    = var.virtual_node != null ? var.virtual_node : ""
@@ -186,6 +192,27 @@ locals {
     }
   }
 
+  cwagent_container_definition = {
+    "name" : "ecs-cwagent",
+    "image" : "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+    "essential" : true,
+    "secrets" : [
+      {
+        "name" : "CW_CONFIG_CONTENT",
+        "valueFrom" : "ecs-cwagent"
+      }
+    ],
+    "logConfiguration" : {
+      "logDriver" : "awslogs",
+      "options" : {
+        "awslogs-create-group" : "true",
+        "awslogs-group" : "/ecs/ecs-cwagent",
+        "awslogs-region" : data.aws_region.current.name,
+        "awslogs-stream-prefix" : "ecs"
+      }
+    }
+  }
+
 
   use_virtual_gateway_def = var.mesh_name != null && var.virtual_gateway != null
   use_virtual_node_def    = var.mesh_name != null && var.virtual_node != null
@@ -202,6 +229,7 @@ locals {
       local.use_newrelic_firelens_sidecar ? [local.newrelic_firelens_container_definition] : [],
       local.use_envoy_sidecar ? [local.envoy_proxy_container_definition] : [],
       local.use_xray_sidecar ? [local.xray_container_definition] : [],
+      var.use_cwagent_sidecar ? [local.cwagent_container_definition] : [],
     )
   )
 }

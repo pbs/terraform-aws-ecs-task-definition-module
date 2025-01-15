@@ -147,6 +147,14 @@ data "aws_iam_policy_document" "task_execution_role_policy_doc" {
       resources = [statement.value]
     }
   }
+
+  dynamic "statement" {
+    for_each = var.use_cwagent_sidecar == true ? [1] : []
+    content {
+      actions   = ["ssm:GetParameters"]
+      resources = ["arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/ecs-cwagent"]
+    }
+  }
 }
 
 resource "aws_iam_role_policy" "task_execution_role_policy" {
@@ -154,4 +162,11 @@ resource "aws_iam_role_policy" "task_execution_role_policy" {
   role        = aws_iam_role.task_execution_role.name
 
   policy = local.task_execution_role_policy_json
+}
+
+resource "aws_iam_role_policy_attachment" "cw_agent" {
+  count = var.use_cwagent_sidecar ? 1 : 0
+
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role       = aws_iam_role.task_role.name
 }
