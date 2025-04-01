@@ -54,7 +54,7 @@ locals {
       "secrets" : [
         for secret in var.secrets : {
           name  = secret.name
-          value = secret.value
+          valueFrom = secret.valueFrom
         }
       ]
     },

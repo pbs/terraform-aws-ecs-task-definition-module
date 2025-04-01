@@ -109,7 +109,7 @@ variable "secrets" {
   default     = []
   type        = set(object({
     name  = string
-    value = string
+    valueFrom = string
   }))
 }
 
