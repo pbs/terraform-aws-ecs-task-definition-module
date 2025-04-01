@@ -10,6 +10,7 @@ locals {
     var.env_vars
   )
 
+
   app_log_configuration = merge(
     local.use_newrelic_firelens_sidecar ? {
       "logDriver" : "awsfirelens",
@@ -47,6 +48,15 @@ locals {
       }],
       "essential" : true,
       "logConfiguration" : local.app_log_configuration,
+    },
+    length(var.secrets) == 0 ? {} :
+    {
+      "secrets" : [
+        for secret in var.secrets : {
+          name  = secret.name
+          value = secret.value
+        }
+      ]
     },
     length(var.efs_mounts) == 0 ? {} : {
       "mountPoints" : [
