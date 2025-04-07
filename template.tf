@@ -53,7 +53,7 @@ locals {
     {
       "secrets" : [
         for secret in var.secrets : {
-          name  = secret.name
+          name      = secret.name
           valueFrom = secret.valueFrom
         }
       ]
