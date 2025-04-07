@@ -170,3 +170,33 @@ resource "aws_iam_role_policy_attachment" "cw_agent" {
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
   role       = aws_iam_role.task_role.name
 }
+
+resource "aws_iam_policy" "extra_role_policy" {
+  count       = var.extra_role_policy_json != null ? 1 : 0
+
+  name        = "${local.name}-extra-role-policy"
+  description = "Extra role policy"
+  policy      = var.extra_role_policy_json
+}
+
+resource "aws_iam_role_policy_attachment" "extra_role_policy" {
+  count      = var.extra_role_policy_json != null ? 1 : 0
+
+  role       = aws_iam_role.task_role.name
+  policy_arn = aws_iam_policy.extra_role_policy[0].arn
+}
+
+resource "aws_iam_policy" "extra_task_execution_role_policy" {
+  count       = var.extra_task_execution_role_policy_json != null ? 1 : 0
+
+  name        = "${local.name}-extra-task-execution-policy"
+  description = "Extra role policy"
+  policy      = var.extra_task_execution_role_policy_json
+}
+
+resource "aws_iam_role_policy_attachment" "extra_task_execution_role_policy" {
+  count      = var.extra_task_execution_role_policy_json != null ? 1 : 0
+
+  role       = aws_iam_role.task_execution_role.name
+  policy_arn = aws_iam_policy.extra_task_execution_role_policy[0].arn
+}

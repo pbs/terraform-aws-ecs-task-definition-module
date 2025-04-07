@@ -1,11 +1,23 @@
 variable "role_policy_json" {
-  description = "(optional) IAM policy to attach to role used for this task"
+  description = "(optional) IAM policy to attach to role used for this task and replace defaults"
   default     = null
   type        = string
 }
 
 variable "task_execution_role_policy_json" {
-  description = "(optional) IAM policy to attach to task execution role used for this task"
+  description = "(optional) IAM policy to attach to task execution role used for this task and replace defaults"
+  default     = null
+  type        = string
+}
+
+variable "extra_role_policy_json" {
+  description = "(optional) Extra IAM policy to attach to role used for this task without replacing defaults"
+  default     = null
+  type        = string
+}
+
+variable "extra_task_execution_role_policy_json" {
+  description = "(optional) Extra IAM policy to attach to task execution role used for this task without replacing defaults"
   default     = null
   type        = string
 }
