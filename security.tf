@@ -30,6 +30,7 @@ data "aws_iam_policy_document" "policy_doc" {
       "cloudwatch:PutMetricData",
       "kms:ListKeys",
       "ssm:DescribeParameters",
+      "ecs:ExecuteCommand",
     ]
     resources = ["*"]
   }
@@ -138,6 +139,18 @@ data "aws_iam_policy_document" "task_execution_role_policy_doc" {
       "logs:PutLogEvents",
     ]
     resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "kms:Decrypt",
+      "ssm:GetParametersByPath",
+      "ssm:GetParameters",
+      "ssm:GetParameter"
+    ]
+    resources = [
+      "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_path}*",
+    ]
   }
 
   dynamic "statement" {
